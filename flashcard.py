@@ -43,6 +43,7 @@ words = [
 count = len(words)
 answered = True
 
+#Answer propmt if they dont answer 
 def next():
     global answered
     if not answered:
@@ -61,6 +62,7 @@ def next():
     # Vocab word configuration
     vocab_word.config(text=words[random_word][0])
 
+#answer prompt if it is incorrect or correct
 def answer():
     global answered
     if entry_box.get().strip().lower() == words[random_word][1].lower():
@@ -69,10 +71,12 @@ def answer():
     else:
         answer_label.config(text=f"Incorrect, try again! {words[random_word][0]} is not {entry_box.get().strip().lower()}")
 
+#Gives a hint of the answer 
 def hint():
     hint = words[random_word][1][:len(words[random_word][1])//2] + '...'
     help_label.config(text=f"Hint: {hint}")
 
+#Lets user add card to the stack
 def add_card():
     new_term = simpledialog.askstring("New Term", "Enter the new term:")
     new_definition = simpledialog.askstring("New Definition", "Enter the definition of the new term:")
@@ -96,18 +100,23 @@ entry_box.pack(pady=20)
 button_frame = Frame(root)
 button_frame.pack(pady=20)
 
+#Add card button
 add_card_button = Button(button_frame, text="Add Card", command=add_card)
 add_card_button.grid(row="0", column="0", padx=20)
 
+#Answer button
 answer_button = Button(button_frame, text="Answer", command=answer)
 answer_button.grid(row="0", column="1", padx=20)
 
+#Next button
 next_button = Button(button_frame, text="Next", command=next)
 next_button.grid(row="0", column="2")
 
+#Help button 
 help_button = Button(button_frame, text="Need help?", command=hint)
 help_button.grid(row="0", column="3", padx=20)
 
+#Quit button 
 quit_button = Button(button_frame, text="Quit", command=root.quit)
 quit_button.grid(row="0", column="4", padx=20)
 
